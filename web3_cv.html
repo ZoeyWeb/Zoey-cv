@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yizhou Wen - VIP PM/Middle Office Specialist</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #2d1b69 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .analytics-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.05;
+        }
+        
+        .data-point {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #f59e0b;
+            border-radius: 50%;
+            animation: dataFlow 8s linear infinite;
+        }
+        
+        @keyframes dataFlow {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-20px) scale(1); opacity: 0; }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #f59e0b, #00d4ff, transparent);
+            animation: dataStream 4s linear infinite;
+        }
+        
+        @keyframes dataStream {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .name {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #f59e0b, #00d4ff, #7c3aed);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.4)); }
+            to { filter: drop-shadow(0 0 25px rgba(0, 212, 255, 0.6)); }
+        }
+        
+        .title {
+            font-size: 1.8rem;
+            color: #f59e0b;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #00d4ff;
+            margin-bottom: 20px;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(245, 158, 11, 0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            background: rgba(245, 158, 11, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(245, 158, 11, 0.1);
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #f59e0b;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .vip-icon {
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(45deg, #f59e0b, #00d4ff);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #000;
+            font-size: 1.2rem;
+        }
+        
+        .highlight-summary {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(0, 212, 255, 0.15));
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .highlight-summary::before {
+            content: '🎯';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: #1a1a3e;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .competency-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .competency-card {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(124, 58, 237, 0.1));
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .competency-card:hover {
+            transform: scale(1.03);
+            border-color: #f59e0b;
+            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.2);
+        }
+        
+        .competency-card h3 {
+            color: #f59e0b;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .experience-item {
+            border-left: 3px solid #f59e0b;
+            padding-left: 20px;
+            margin-bottom: 35px;
+            position: relative;
+        }
+        
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 0;
+            width: 13px;
+            height: 13px;
+            background: #f59e0b;
+            border-radius: 50%;
+            box-shadow: 0 0 15px #f59e0b;
+        }
+        
+        .job-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #f59e0b;
+            margin-bottom: 5px;
+        }
+        
+        .company {
+            font-size: 1.2rem;
+            color: #00d4ff;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .date {
+            color: #9ca3af;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .achievement {
+            background: rgba(245, 158, 11, 0.1);
+            padding: 12px 18px;
+            margin: 12px 0;
+            border-radius: 8px;
+            border-left: 3px solid #f59e0b;
+            transition: all 0.3s ease;
+        }
+        
+        .achievement:hover {
+            background: rgba(245, 158, 11, 0.15);
+            transform: translateX(5px);
+        }
+        
+        .skill-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #f59e0b, #ff6b35);
+            color: #000;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin: 5px 5px 5px 0;
+            box-shadow: 0 2px 10px rgba(245, 158, 11, 0.3);
+        }
+        
+        .metrics-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .metric-card {
+            background: rgba(0, 212, 255, 0.1);
+            padding: 18px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .metric-card:hover {
+            background: rgba(0, 212, 255, 0.15);
+            transform: translateY(-3px);
+        }
+        
+        .metric-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #00d4ff;
+        }
+        
+        .metric-label {
+            color: #9ca3af;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
+        .project-deep-dive {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(245, 158, 11, 0.1));
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            margin: 20px 0;
+        }
+        
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #7c3aed;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .analysis-highlight {
+            background: rgba(0, 212, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid #00d4ff;
+            margin: 10px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .name { font-size: 2.5rem; }
+            .contact-info { flex-direction: column; align-items: center; }
+            .competency-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="analytics-bg" id="analytics-bg"></div>
+    
+    <div class="container">
+        <header class="header">
+            <h1 class="name">YIZHOU WEN</h1>
+            <p class="title">📊 VIP PM / Middle Office Specialist</p>
+            <p class="subtitle">Data Analysis | Client Strategy | Product Management | Growth Optimization</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>📧</span>
+                    <span>ywenap@connect.ust.hk</span>
+                </div>
+                <div class="contact-item">
+                    <span>📱</span>
+                    <span>+852-55173921</span>
+                </div>
+                <div class="contact-item">
+                    <span>🎓</span>
+                    <span>PhD @ HKUST</span>
+                </div>
+                <div class="contact-item">
+                    <span>🌏</span>
+                    <span>Hong Kong</span>
+                </div>
+            </div>
+        </header>
+
+        <section class="section">
+            <h2 class="section-title">
+                <div class="vip-icon">🎯</div>
+                Professional Summary
+            </h2>
+            
+            <div class="highlight-summary">
+                <strong style="color: #f59e0b; font-size: 1.2rem;">VIP Client Management & Data-Driven Growth Specialist</strong>
+                <div style="margin-top: 15px; line-height: 1.8;">
+                    PhD researcher with <strong>1.5+ years hands-on experience</strong> managing Web3 enterprise clients and digital transformation projects. Proven track record in <strong>data analysis, client behavior tracking, and growth strategy</strong> development. Successfully managed <strong>5+ VIP enterprise accounts</strong> with 100% retention rate, generating <strong>HK$2M+ pipeline value</strong>. Expert in <strong>tokenomics analysis, fee structure optimization</strong>, and cross-functional project management in fast-paced crypto environment.
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">
+                <div class="vip-icon">🚀</div>
+                Core Competencies for VIP PM Role
+            </h2>
+            
+            <div class="competency-grid">
+                <div class="competency-card">
+                    <h3>📈 Data Analysis & Reporting</h3>
+                    <div class="skill-badge">Python</div>
+                    <div class="skill-badge">SPSS/Stata</div>
+                    <div class="skill-badge">Performance Analytics</div>
+                    <div class="skill-badge">Client Behavior Analysis</div>
+                    <p style="margin-top: 15px; color: #ccc; line-height: 1.6;">PhD-level research methodology applied to client performance tracking, trading pattern analysis, and growth opportunity identification</p>
+                </div>
+                
+                <div class="competency-card">
+                    <h3>🏦 Financial Markets Knowledge</h3>
+                    <div class="skill-badge">Tokenomics</div>
+                    <div class="skill-badge">Fee Structures</div>
+                    <div class="skill-badge">Market Liquidity</div>
+                    <div class="skill-badge">Trading Analytics</div>
+                    <p style="margin-top: 15px; color: #ccc; line-height: 1.6;">Deep understanding of crypto markets, DeFi protocols, and traditional financial instruments through academic research and practical application</p>
+                </div>
+                
+                <div class="competency-card">
+                    <h3>👥 VIP Client Management</h3>
+                    <div class="skill-badge">Enterprise Accounts</div>
+                    <div class="skill-badge">Stakeholder Management</div>
+                    <div class="skill-badge">Cross-cultural Comm.</div>
+                    <div class="skill-badge">Relationship Building</div>
+                    <p style="margin-top: 15px; color: #ccc; line-height: 1.6;">Proven experience managing high-value enterprise clients across Asia-Pacific, with focus on long-term relationship development</p>
+                </div>
+                
+                <div class="competency-card">
+                    <h3>🔄 Product Lifecycle Management</h3>
+                    <div class="skill-badge">Requirements Gathering</div>
+                    <div class="skill-badge">Change Management</div>
+                    <div class="skill-badge">Process Optimization</div>
+                    <div class="skill-badge">Cross-team Coordination</div>
+                    <p style="margin-top: 15px; color: #ccc; line-height: 1.6;">Experience leading product improvements from initial requirements through implementation and client communication</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">
+                <div class="vip-icon">💼</div>
+                Professional Experience
+            </h2>
+            
+            <div class="experience-item">
+                <div class="job-title">Project Manager - Enterprise Client Solutions</div>
+                <div class="company">Meta Metopia Technology Company Limited</div>
+                <div class="date">2023 - 2024 | Hong Kong</div>
+                
+                <div class="project-deep-dive">
+                    <div class="project-title">📊 VIP Client Portfolio Management & Growth Analytics</div>
+                    
+                    <div class="analysis-highlight">
+                        <strong>🎯 Client Performance Analysis & Optimization</strong>
+                        <div class="achievement">
+                            📈 <strong>Data-Driven Client Insights</strong>: Analyzed trading patterns and usage data for 5+ enterprise VIP clients, identifying optimization opportunities that improved client engagement by 40%
+                        </div>
+                        <div class="achievement">
+                            📊 <strong>Performance Reporting</strong>: Created comprehensive weekly/monthly analysis reports tracking client trading stats, revenue contribution, and growth metrics for senior management
+                        </div>
+                        <div class="achievement">
+                            🔍 <strong>Behavior Tracking</strong>: Implemented client behavior monitoring systems to track transaction patterns, identify upselling opportunities, and predict churn risk
+                        </div>
+                    </div>
+                    
+                    <div class="analysis-highlight">
+                        <strong>💡 Product Improvement & Change Management</strong>
+                        <div class="achievement">
+                            🔄 <strong>Requirements Management</strong>: Led cross-functional teams to gather VIP client requirements, manage change lifecycle from concept to deployment across 3 major product updates
+                        </div>
+                        <div class="achievement">
+                            📋 <strong>Process Documentation</strong>: Developed standardized client onboarding processes and improved presentation materials, reducing onboarding time by 30%
+                        </div>
+                        <div class="achievement">
+                            🤝 <strong>Stakeholder Coordination</strong>: Coordinated with growth, marketing, and product teams to implement client feedback and drive product improvements
+                        </div>
+                    </div>
+                    
+                    <div class="analysis-highlight">
+                        <strong>🚀 Growth Strategy & Business Development</strong>
+                        <div class="achievement">
+                            💰 <strong>Revenue Growth</strong>: Developed and executed growth strategies that contributed to HK$2M+ pipeline value with 100% client retention rate
+                        </div>
+                        <div class="achievement">
+                            📈 <strong>Client Expansion</strong>: Identified and pursued upselling opportunities, successfully expanding client engagement across multiple service lines
+                        </div>
+                        <div class="achievement">
+                            🎯 <strong>Market Analysis</strong>: Conducted competitive analysis and market research to inform strategic positioning and pricing strategies
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="metrics-showcase">
+                    <div class="metric-card">
+                        <div class="metric-number">5+</div>
+                        <div class="metric-label">VIP Enterprise Clients</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-number">100%</div>
+                        <div class="metric-label">Client Retention Rate</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-number">40%</div>
+                        <div class="metric-label">Engagement Improvement</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-number">HK$2M+</div>
+                        <div class="metric-label">Pipeline Generated</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-number">30%</div>
+                        <div class="metric-label">Process Efficiency Gain</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="job-title">Blockchain Research Analyst & PhD Candidate</div>
+                <div class="company">Hong Kong University of Science and Technology</div>
+                <div class="date">2023 - Present | Supervised by Prof. Yang Wang (VP & Chief Web3 Advisor)</div>
+                
+                <div class="project-deep-dive">
+                    <div class="project-title">🔬 Digital Asset Market Analysis & Research</div>
+                    <div class="achievement">
+                        📊 <strong>Market Research & Analysis</strong>: Conducted comprehensive analysis of crypto trading patterns, liquidity provision strategies, and fee optimization models
+                    </div>
+                    <div class="achievement">
+                        💱 <strong>Tokenomics Research</strong>: Deep-dive research into stablecoin mechanisms, RWA tokenization, and institutional trading strategies
+                    </div>
+                    <div class="achievement">
+                        📝 <strong>Industry Reports</strong>: Published 3 influential papers on Hong Kong's digital asset strategy, demonstrating thought leadership in crypto markets
+                    </div>
+                    <div class="achievement">
+                        🌐 <strong>Industry Network</strong>: Built strong relationships with crypto industry leaders, institutional clients, and regulatory stakeholders
+                    </div>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="job-title">Product Design Lead</div>
+                <div class="company">Midea Real Estate</div>
+                <div class="date">2021 - 2022 | Changsha, China</div>
+                
+                <div class="achievement">
+                    📈 <strong>Market Analysis</strong>: Conducted comprehensive market research and customer demand analysis to inform product positioning strategies
+                </div>
+                <div class="achievement">
+                    💼 <strong>Client Relationship Management</strong>: Managed high-value client relationships and coordinated multi-professional services delivery
+                </div>
+                <div class="achievement">
+                    ⚡ <strong>Project Management</strong>: Led fast-paced project delivery under tight schedules, including cost control and quality management
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="job-title">Cross-Border Business Development</div>
+                <div class="company">Z-Arch Education LLC & Shanghai Baiying Education</div>
+                <div class="date">2019 - 2021 | US & China Markets</div>
+                
+                <div class="achievement">
+                    📊 <strong>Performance Analytics</strong>: Tracked and analyzed key business metrics across 200+ clients, maintaining 95% satisfaction rate
+                </div>
+                <div class="achievement">
+                    🚀 <strong>Growth Strategy</strong>: Developed data-driven growth strategies for US and Chinese markets, building partnerships with 60+ professionals
+                </div>
+                <div class="achievement">
+                    🤝 <strong>Stakeholder Management</strong>: Successfully managed complex multi-stakeholder relationships across different time zones and cultures
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">
+                <div class="vip-icon">🎓</div>
+                Education & Research
+            </h2>
+            
+            <div class="experience-item">
+                <div class="job-title">Doctor of Philosophy (PhD) - AI & Web3.0</div>
+                <div class="company">Hong Kong University of Science and Technology</div>
+                <div class="date">2023 - Present</div>
+                <div class="achievement">
+                    🎯 Research Focus: Blockchain Technology, AI Application in Finance, Digital Asset Analysis
+                </div>
+                <div class="achievement">
+                    👨‍🏫 Supervised by Prof. Yang Wang (VP of HKUST, Chief Scientific Advisor for Web3.0)
+                </div>
+                <div class="achievement">
+                    📚 Relevant Coursework: AI Application, Innovation in Web3.0, Blockchain Technology Application
+                </div>
+            </div>
+            
+            <div class="experience-item">
+                <div class="job-title">Master of Architecture (GPA: 3.57/4.0)</div>
+                <div class="company">Hunan University</div>
+                <div class="date">2015 - 2017</div>
+                <div class="achievement">
+                    🏆 First-Class Outstanding Student Scholarship (Every Semester)
+                </div>
+                <div class="achievement">
+                    📊 Strong foundation in quantitative analysis, research methodology, and data visualization
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">
+                <div class="vip-icon">🛠️</div>
+                Technical Skills & Tools
+            </h2>
+            
+            <div class="competency-grid">
+                <div class="competency-card">
+                    <h3>📊 Data Analysis & Reporting</h3>
+                    <div class="skill-badge">Python</div>
+                    <div class="skill-badge">SPSS</div>
+                    <div class="skill-badge">Stata</div>
+                    <div class="skill-badge">Excel Advanced</div>
+                    <div class="skill-badge">Data Visualization</div>
+                </div>
+                
+                <div class="competency-card">
+                    <h3>🏦 Financial & Crypto Knowledge</h3>
+                    <div class="skill-badge">Tokenomics</div>
+                    <div class="skill-badge">DeFi Protocols</div>
+                    <div class="skill-badge">Market Analysis</div>
+                    <div class="skill-badge">Risk Assessment</div>
+                </div>
+                
+                <div class="competency-card">
+                    <h3>💼 Business & Communication</h3>
+                    <div class="skill-badge">Project Management</div>
+                    <div class="skill-badge">Stakeholder Management</div>
+                    <div class="skill-badge">Presentation</div>
+                    <div class="skill-badge">Report Writing</div>
+                </div>
+                
+                <div class="competency-card">
+                    <h3>🌐 Languages & Cultural</h3>
+                    <div class="skill-badge">English (TOEFL 110)</div>
+                    <div class="skill-badge">Mandarin (Native)</div>
+                    <div class="skill-badge">Cross-cultural Comm.</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">
+                <div class="vip-icon">📈</div>
+                Key Publications & Thought Leadership
+            </h2>
+            
+            <div class="project-deep-dive">
+                <div class="project-title">💱 Crypto Market Analysis & Strategy Papers</div>
+                <div class="achievement">
+                    📰 "提議香港發行以外匯儲蓄背書的港元穩定幣" (July 2023) - Analysis of HKD stablecoin market opportunity and structural design
+                </div>
+                <div class="achievement">
+                    📰 "抢夺先机发行政府支持的港元稳定币" (August 2023) - Strategic analysis of government-backed stablecoin implementation
+                </div>
+                <div class="achievement">
+                    📰 "华为卖红酒：RWA Tokenization引爆金融新秩序" (October 2024) - Market analysis of RWA tokenization trends and implications
+                </div>
+                <div style="margin-top: 15px; padding: 15px; background: rgba(0, 212, 255, 0.1); border-radius: 8px;">
+                    <strong style="color: #00d4ff;">Industry Impact:</strong> These publications demonstrate deep understanding of crypto market dynamics, regulatory considerations, and strategic positioning - essential skills for VIP client advisory and market analysis roles.
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">
+                <div class="vip-icon">🌟</div>
+                Why I'm Ideal for Binance VIP PM Role
+            </h2>
+            
+            <div class="highlight-summary">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                    <div>
+                        <h3 style="color: #f59e0b; margin-bottom: 10px;">📊 Proven Data Analysis Skills</h3>
+                        <p>PhD-level research methodology + practical experience analyzing client performance and trading patterns for VIP accounts</p>
+                    </div>
+                    <div>
+                        <h3 style="color: #f59e0b; margin-bottom: 10px;">🏦 Deep Crypto Market Knowledge</h3>
+                        <p>Extensive research in tokenomics, stablecoins, and DeFi protocols provides strong foundation for understanding market liquidity and fee structures</p>
+                    </div>
+                    <div>
+                        <h3 style="color: #f59e0b; margin-bottom: 10px;">🤝 VIP Client Management Experience</h3>
+                        <p>1.5+ years managing enterprise clients with 100% retention rate, including requirement gathering and stakeholder coordination</p>
+                    </div>
+                    <div>
+                        <h3 style="color: #f59e0b; margin-bottom: 10px;">⚡ Fast-Paced Environment Ready</h3>
+                        <p>Proven ability to work under pressure in crypto industry, with startup experience and cross-functional project leadership</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">
+                <div class="vip-icon">🏆</div>
+                Achievements & Recognition
+            </h2>
+            
+            <div class="metrics-showcase">
+                <div class="metric-card">
+                    <div class="metric-number">95%</div>
+                    <div class="metric-label">Client Satisfaction Rate</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">3</div>
+                    <div class="metric-label">Industry Publications</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">200+</div>
+                    <div class="metric-label">Clients Managed</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">TOEFL 110</div>
+                    <div class="metric-label">English Proficiency</div>
+                </div>
+            </div>
+            
+            <div class="achievement">
+                🎨 CGDA Visual Communication Design Competition - "Created Campus" Honorable Mention (2022)
+            </div>
+            <div class="achievement">
+                🌱 National Green Building Design Competition - "Water Imagery" Honorable Mention (2015)
+            </div>
+            <div class="achievement">
+                🏆 First-Class Outstanding Student Scholarship - Hunan University (Every Semester 2015-2017)
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Create data flow effects
+        function createDataFlow() {
+            const bg = document.getElementById('analytics-bg');
+            setInterval(() => {
+                const point = document.createElement('div');
+                point.className = 'data-point';
+                point.style.left = Math.random() * 100 + '%';
+                point.style.animationDelay = '0s';
+                point.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                bg.appendChild(point);
+                
+                setTimeout(() => {
+                    if (bg.contains(point)) {
+                        bg.removeChild(point);
+                    }
+                }, 10000);
+            }, 500);
+        }
+        
+        createDataFlow();
+        
+        // Enhanced hover effects for sections
+        document.querySelectorAll('.section').forEach(section => {
+            section.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px)';
+                this.style.boxShadow = '0 25px 50px rgba(245, 158, 11, 0.15)';
+            });
+            
+            section.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = '0 20px 40px rgba(245, 158, 11, 0.1)';
+            });
+        });
+        
+        // Add interactive effects to metric cards
+        document.querySelectorAll('.metric-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px) scale(1.05)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+        
+        // Add click animation to achievements
+        document.querySelectorAll('.achievement').forEach(item => {
+            item.addEventListener('click', function() {
+                this.style.background = 'rgba(245, 158, 11, 0.25)';
+                this.style.transform = 'translateX(10px)';
+                setTimeout(() => {
+                    this.style.background = 'rgba(245, 158, 11, 0.1)';
+                    this.style.transform = 'translateX(0)';
+                }, 300);
+            });
+        });
+        
+        // Add pulse effect to competency cards
+        document.querySelectorAll('.competency-card').forEach((card, index) => {
+            setTimeout(() => {
+                card.style.animation = 'pulse 0.6s ease-in-out';
+            }, index * 200);
+        });
+        
+        // Add CSS for pulse animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+                100% { transform: scale(1); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
